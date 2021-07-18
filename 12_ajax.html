@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Llamada ajax con JQUERY</title>
+    <script src="jquery.js"></script>
+</head>
+<body>
+    <table></table>
+    <button>Nueva frase inspiradora</button>
+    <script>
+        $(function(){
+
+            const settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://jsonplaceholder.typicode.com/posts",
+                "method": "GET"
+            };
+
+            $.ajax(settings).done(function (response) {
+                
+                for(i = 0; i < 20; i++){
+                    $('table').append(`<tr><td>${response[i].title}</td></tr>`)
+                }
+
+                $('button').on('click',function(event){
+                    $('table').append(`<tr><td>${response[Math.round(Math.random() * response.length)].title}</td></tr>`)
+                })
+	            
+            });  
+        })
+    </script>
+    
+</body>
+</html>
